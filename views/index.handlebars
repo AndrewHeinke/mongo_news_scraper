@@ -56,8 +56,12 @@
   <div class="container">
   <h1>Latest Fantasy Football News</h1>
   <h2><i>Dominate your fantasy league!</i></h2>
-  <div id="articles"></div>
-  <div id="comments"></div>
+  <ul>
+    {{#each articles}}
+      <li>{{this.title}}</li>
+      <li>{{this.link}}</li>
+    {{/each}}
+  </ul>
   </div>
 </div>
 </div>
