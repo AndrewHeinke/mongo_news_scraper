@@ -14,12 +14,12 @@ router.get('/', function(req, res) {
 
 router.get('/scrape', function(req, res) {
 
-  request('http://www.rotoworld.com/headlines/nfl/0/Football-headlines', function(error, response, html) {
+  request('http://www.foxnews.com/sports.html', function(error, response, html) {
 
     var $ = cheerio.load(html);
     var resultsArray = [];
 
-    $('div.headline').each(function(i, element) {
+    $('h3').each(function(i, element) {
 
 				var result = {};
 
