@@ -3,10 +3,17 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
+var URL = require('url-parse');
 var cheerio = require('cheerio');
 
 var Comment = require('../models/Comment.js');
 var Article = require('../models/Article.js');
+
+
+// handles relative href values
+var START_URL = "http://www.foxnews.com/sports.html";
+var url = new URL(START_URL);
+var baseUrl = url.protocol + "//" + url.hostname;
 
 router.get('/', function(req, res) {
   res.redirect('/scrape');
@@ -24,7 +31,7 @@ router.get('/scrape', function(req, res) {
 				var result = {};
 
 				result.title = $(this).children('a').text();
-				result.link = $(this).children('a').attr('href');
+				result.link = baseUrl + $(this).children('a').attr('href');
 
         resultsArray.push(result);
 
