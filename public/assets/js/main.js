@@ -1,20 +1,33 @@
-$(document).on('click', "#makenew", function(){
+$(document).on('click', 'h3', function(){
+
+  $('#results').empty();
+
+  var articleID = $(this).attr('data-id');
+
+
   $.ajax({
-    type: "POST",
-    dataType: "json",
-    url: '/submit',
-    data: {
-      body: $('#commentArea').val(),
-      created: Date.now()
-    }
+    method: "GET",
+    url: "/articles/" + articleID,
   })
-  // If that API call succeeds,
-  // add the title and a delete button for the note to the page
-  .done(function(data){
-    // add the title and delete button to the #results section
-    $('#results').prepend('<p class="dataentry" data-id=' + data._id + '><span class="dataTitle" data-id=' + data._id+ '>' + data.body + '</span><span class=deleter>X</span></p>');
-    // clear the note and title inputs on the page
-    $('#commentArea').val("");
-  }
-  );
+
+    .done( function(data) {
+
+      $('#results').append('<h2>' + data.title + '</h2>');
+
+      $('#results').append('<input id="titleinput" name="title" >');
+
+      $('#results').append('<textarea id="bodyinput" name="body"></textarea>');
+
+      $('#results').append('<button data-id="' + data._id + '" id="savenote">Save</button>');
+
+      if(data.comment){
+        console.log(data.comment);
+
+      $('#results').append('<button data-id="' + data.comment._id + '" id="deletenote">Delete Note</button>');
+
+        $('#titleinput').val(data.comment.title);
+
+        $('#bodyinput').val(data.comment.body);
+      }
+    });
 });

@@ -52,21 +52,45 @@ router.get('/scrape', function(req, res) {
   });
 });
 
-router.post('/submit', function(req, res) {
-  console.log(req.body);
-  // insert the note into the notes collection
-  db.Comment.insert(req.body, function(err, saved) {
-    // log any errors
-    if (err) {
-      console.log(err);
-    }
-    // otherwise, send the note back to the browser.
-    // this will fire off the success function of the ajax request
-    else {
-      res.send(saved);
-    }
-  });
+router.get('/articles', function(req, res) {
+    Article.find({}, function(err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.json(doc);
+        }
+    });
 });
 
+router.get('/articles/:id', function(req, res) {
+    Article.findOne({ '_id': req.params.id })
+        .populate('comment')
+        .exec(function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(doc);
+            }
+        });
+});
+
+router.post('/articles/:id', function(req, res) {
+    var newComment = new Comment(req.body);
+    newComment.save(function(err, doc) {
+        if (err) {
+            console.log(err);
+        } else {
+            Article.findOneAndUpdate({ '_id': req.params.id }, { 'comment': doc._id })
+                .exec(function(err, doc) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send(doc);
+                    }
+                });
+        }
+    });
+});
 
 module.exports = router;
