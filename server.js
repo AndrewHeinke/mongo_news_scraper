@@ -24,7 +24,7 @@ var routes = require('./controllers/controller.js');
 app.use('/', routes);
 
 
-mongoose.connect('mongodb://localhost/fantasyNewsScraper');
+mongoose.connect('mongodb://heroku_7sn6k3vx:dvpcksk5n34h4umhr9p5g5n3bo@ds017726.mlab.com:17726/heroku_7sn6k3vx');
 var db = mongoose.connection;
 
 db.on('error', function(err) {
