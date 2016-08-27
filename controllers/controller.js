@@ -52,4 +52,22 @@ router.get('/scrape', function(req, res) {
   });
 });
 
+router.post('/submit', function(req, res) {
+  console.log(req.body);
+  // insert the note into the notes collection
+  db.Comment.insert(req.body, function(err, saved) {
+    // log any errors
+    if (err) {
+      console.log(err);
+    }
+    // otherwise, send the note back to the browser.
+    // this will fire off the success function of the ajax request
+    else {
+      res.send(saved);
+    }
+  });
+});
+
+
+
 module.exports = router;
