@@ -1,8 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900);
 .row {
   margin-right: 0px;
   margin-left: 0px;
 }
+.article-title {
+  font-weight: 900;
+  font-size: 3em;
+}
+.btn.btn-info.btn-lg {
+  border-radius: 3px;
+  background: #FFFFFF;
+  color: #049372;
+  font-size: 18px;
+  font-weight: bold;
+  border: #049372 2px solid;
+}
 
+.btn.btn-info.btn-lg:hover {
+  background: #049372;
+  color: #FFFFFF;
+}
+
+.page-title {
+  font-weight: 900;
+  font-size: 5em;
+}
 li.ui-state-default{
     background:#fff0;
     border:none;
@@ -15,7 +37,7 @@ li.ui-state-default:last-child{
     border-bottom:none;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400);
+
 body {
   background-color:#fff;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +77,7 @@ body {
 }
 
 hr {
- border-color:#ececec;
+ border-color:#cccccc;
 }
 
 button {

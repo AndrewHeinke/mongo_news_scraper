@@ -1,10 +1,12 @@
 <div class="row affix-row">
     <div class="col-sm-12 affix-content">
         <div class="col-sm-9">
-            <h1>Latest Fantasy Football News</h1>
-            <h2><i>Dominate your fantasy league!</i></h2>
+            <h1 class="page-title">Latest Fantasy Football News</h1>
+            <h2><i>Click an article title to view and post comments</i></h2>
             {{#each articles}}
-                <a target="_blank" href="{{this.link}}"><h3>{{this.title}}</h3></a>
+              <h3 class="article-title">{{this.title}}</h3>
+              <a target="_blank" href="{{this.link}}"><button type="button" class="btn btn-info btn-lg">Read Article</button></a>
+              <hr>
             {{/each}}
         </div>
         <div class="col-sm-3">
